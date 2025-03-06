@@ -21,7 +21,7 @@ function PlantPage() {
     <main>
       <NewPlantForm setPlants={setPlants} />
       <Search setSearchTerm={setSearchTerm} />
-      <PlantList plants={filteredPlants} />
+      <PlantList plants={filteredPlants} setPlants={setPlants} />
     </main>
   );
 }
