@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function PlantCard({ plant }) {
+function PlantCard({ plant, setPlants }) {
   const [inStock, setInStock] = useState(true);
   const [price, setPrice] = useState(plant.price);
 
@@ -15,6 +15,14 @@ function PlantCard({ plant }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ price: parseFloat(price) }),
+    });
+  }
+
+  function handleDelete() {
+    fetch(`http://localhost:6001/plants/${plant.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      setPlants((plants) => plants.filter((p) => p.id !== plant.id));
     });
   }
 
@@ -38,6 +46,7 @@ function PlantCard({ plant }) {
       ) : (
         <button>Out of Stock</button>
       )}
+      <button onClick={handleDelete}>Delete</button>
     </li>
   );
 }
